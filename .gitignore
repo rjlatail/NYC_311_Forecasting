@@ -7,3 +7,5 @@ Data/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# logs
+.log
