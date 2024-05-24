@@ -19,6 +19,6 @@ Since inception, the service has continued to expand its usefulness and connecti
 ##### NYC Open Data
 
 ##### Open Meteo
-Weather data was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link]([url](https://open-meteo.com/en/license)).
+Weather data was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
 
 
