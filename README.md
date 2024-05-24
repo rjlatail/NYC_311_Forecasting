@@ -20,7 +20,7 @@ Since inception, the service has continued to expand its usefulness and connecti
 
 ![tweet](Images/NYC_Council_Tweet.png)
 
-Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  <ins><b>Successful forecasting of next-day, next-week and next-month volumes<b><ins> would lead to residents who are more satisfied with the responsiveness of their local government.  
+Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  <ins><b>Successful forecasting of next-day, next-week and next-month volumes</b></ins> would lead to residents who are more satisfied with the responsiveness of their local government.  
 
 ### Data Sources
 **NYC Open Data**: Under the Open Data Law, all New York City agencies are required to make their datasets publicly available on a public portal.  Prior to the creation of the portal, city agencies were required to provide information upon request through New York State's Freedom of Information Law.  However, this method of retrieving information was cumbersome for the requestor and often ineffective, as requests would be submitted ad hoc to a bureaucracy that was not structured to handle them.  The law required city agencies to proactively gather and make available their datasets to the public at large.  The <ins>311 Service Requests</ins> data set has been available since 2011 and now has over 36 million records included with 41 features.
