@@ -20,7 +20,7 @@ Since inception, the service has continued to expand its usefulness and connecti
 
 ![tweet](Images/NYC_Council_Tweet.png)
 
-Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  Successful forecasting of next-day, next-week and next-month volumes would lead to residents who are more satisfied with the responsiveness of their local government.  
+Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  <b>Successful forecasting of next-day, next-week and next-month volumes would lead to residents who are more satisfied with the responsiveness of their local government.  
 
 ### Data Sources
 **NYC Open Data**: Under the Open Data Law, all New York City agencies are required to make their datasets publicly available on a public portal.  Prior to the creation of the portal, city agencies were required to provide information upon request through New York State's Freedom of Information Law.  However, this method of retrieving information was cumbersome for the requestor and often ineffective, as requests would be submitted ad hoc to a bureaucracy that was not structured to handle them.  The law required city agencies to proactively gather and make available their datasets to the public at large.  The <ins>311 Service Requests</ins> data set has been available since 2011 and now has over 36 million records included with 41 features.
@@ -28,7 +28,7 @@ Given the consistent demand for and high expectations of the service, anticipati
 **Open Meteo**: Daily weather data for New York City was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
 
 ### Data Preparation and Transformation
-
+<span style="color:red">TO BE COMPLETED</span>
 
 ### Modeling
 Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of 
