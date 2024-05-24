@@ -28,10 +28,24 @@ Given the consistent demand for and high expectations of the service, anticipati
 **Open Meteo**: Daily weather data for New York City was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
 
 ### Data Preparation and Transformation
-<span style="color:red">TO BE COMPLETED</span>
+<code style>TO BE COMPLETED</code>
+- Data = 20+ GB, be sure to select only relevant features
+- Limited dates
+- Drop no locations
+- Alter datetimes
+- Comsolidated agencies and complaint types
 
 ### Modeling
-Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of 
+Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of...
+
+- AR(1)
+- ARIMA(1,1,1)
+- SARIMA(1,1,1)(1,1,1,7)
+- SARIMA GRID SEARCH
+- SARIMAX
+-   Exogenous variables
+- Prophet
+- LSTM
 
 
 ### Results
