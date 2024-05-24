@@ -16,10 +16,13 @@ Since 2003, New York City has maintained the 311 service, a hub that connects re
 
 While the cost to the city is not large ($68 million out of a $107 annual billion budget, or less than 0.1%) the value it provides to residents and government officials is considerably larger.  Prior to its advent, the city maintained over 40 separate hotlines and call centers for non-emergency resident services, often with overlapping responsibilities.  As a result of having so many entry points to the city, residents often were confused regarding the right way to contact the City.  Very often, residents chose to call the NYPD or 911, even for non-criminal or non-emergency purposes.  By creating such a recognizable and easy-to-remember portal, the City relieved its agencies of this burden and has been able to more effectively address residents' concerns.
 
-Since inception, the service has continued to expand its usefulness and connectivity.  It maintains a significant social media presence, and in 2013 introduced the 311 App to answer questions or allow service request submissions while avoid lengthening call queues.
+Since inception, the service has continued to expand its usefulness and connectivity.  It maintains a significant social media presence, and in 2013 introduced the 311 App to answer questions or allow service request submissions while avoid lengthening call queues.  However, the service is still in very high demand.  The City Council recently passed a bill to require virtual queues with estimated wait times for callers:
+
+![tweet](Images/NYC_Council_Tweet.png)
+
+Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  Successful forecasting of next-day, next-week and next-month volumes would lead to residents who are more satisfied with the responsiveness of their local government.  
 
 ### Data Sources
-
 **NYC Open Data**: Under the Open Data Law, all New York City agencies are required to make their datasets publicly available on a public portal.  Prior to the creation of the portal, city agencies were required to provide information upon request through New York State's Freedom of Information Law.  However, this method of retrieving information was cumbersome for the requestor and often ineffective, as requests would be submitted ad hoc to a bureaucracy that was not structured to handle them.  The law required city agencies to proactively gather and make available their datasets to the public at large.  The <ins>311 Service Requests</ins> data set has been available since 2011 and now has over 36 million records included with 41 features.
 
 **Open Meteo**: Daily weather data for New York City was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
@@ -29,3 +32,8 @@ Since inception, the service has continued to expand its usefulness and connecti
 
 ### Modeling
 Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of 
+
+
+### Results
+
+
