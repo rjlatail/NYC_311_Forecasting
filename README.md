@@ -12,6 +12,7 @@ Since 2003, New York City has maintained the 311 service, a hub that connects re
 - To make payments towards property taxes, parking tickets, or other city assessments
 
 ![pothole](Images/potholes.jpg)
+*[Image source](https://www.flickr.com/photos/nycstreets/25527414131): Used under CC BY-NC-ND 2.0*
 
 While the cost to the city is not large ($68 million out of a $107 annual billion budget, or less than 0.1%) the value it provides to residents and government officials is considerably larger.  Prior to its advent, the city maintained over 40 separate hotlines and call centers for non-emergency resident services, often with overlapping responsibilities.  As a result of having so many entry points to the city, residents often were confused regarding the right way to contact the City.  Very often, residents chose to call the NYPD or 911, even for non-criminal or non-emergency purposes.  By creating such a recognizable and easy-to-remember portal, the City relieved its agencies of this burden and has been able to more effectively address residents' concerns.
 
@@ -23,4 +24,8 @@ Since inception, the service has continued to expand its usefulness and connecti
 
 **Open Meteo**: Daily weather data for New York City was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
 
+### Data Preparation and Transformation
 
+
+### Modeling
+Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of 
