@@ -27,6 +27,8 @@ Given the consistent demand for and high expectations of the service, anticipati
 
 **Open Meteo**: Daily weather data for New York City was sourced from Open Meteo's public API.  Open Meteo utilizes open data from various national weather services and permits usage under the "CC BY 4.0 DEED (Attribution 4.0 International)" which allows reuse with attribution.  The license for this data can be found [at this link](https://open-meteo.com/en/license).
 
+**Population**: Annual figures sourced from the US Census Bureau, interpolated on a linear basis for intermediate dates.
+
 ### Data Preparation and Transformation
 <code style>TO BE COMPLETED</code>
 - Data = 20+ GB, be sure to select only relevant features
@@ -45,6 +47,7 @@ Time series frequently use one of a few types of baseline model.  In particular,
 - SARIMAX
 -   Exogenous variables
 - Prophet
+- GARCH-X
 - LSTM
 
 
