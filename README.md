@@ -34,7 +34,9 @@ The data from NYC Open Data was originally over 20GB.  In addition, while the da
 
 **Scaling**.  The weather data is unscaled, and has different types of distribution.
 
+
 INSERT WEATHER CHARTS HERE
+
 
 Based on these distributions, each feature was scaled in an appropriate fashion:
 
@@ -51,12 +53,21 @@ INSERT TIME SERIES IMAGES FROM PPT
 
 **Baseline Model AR(1)**.  AR(1) is the baseline model.  This is the first model to beat:
 
-RMSE on train:  1215
-RMSE on test:   1129
+AR(1) on next day         AR(1) on next 7 days          AR(1) on next 30 days
+RMSE on train:  1215      RMSE on train:  1215          RMSE on train:  1215
+RMSE on test:   1129      RMSE on test:   1129          RMSE on test:   1129
 
-**First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing to obtain stationary data.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
+**First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing.  To apply ARIMA, we will need to search for the autoregressive (p) term and the moving average (q) term.  But first, we need to ensure that our data is stationary.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
 
+ADF Statistic: -2.5208859123946588
+p-value: 0.11047490316084208
 
+<b><span style="color:red">Not stationary</span></b>. Because the p-value is not less than 0.05, and the statistic is not very large, it is not clear that the data is stationary.  In order to transform the data into a stationary dataset, one-period differencing will be applied.  After that transformation, the ADF test is run again:
+
+ADF Statistic (1st diff): -21.56754139806522
+p-value (1st diff): 0.0
+
+<b><span style="color:#15B01A">Stationary</span></b>.  The data is now clearly stationary.  Further modeling can now be done.  
 
 - ARIMA(1,1,1)
 - SARIMA(1,1,1)(1,1,1,7)
