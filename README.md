@@ -30,17 +30,34 @@ Given the consistent demand for and high expectations of the service, anticipati
 **Population**: Annual figures sourced from the US Census Bureau, interpolated on a linear basis for intermediate dates.
 
 ### Data Preparation and Transformation
-<code style>TO BE COMPLETED</code>
-- Data = 20+ GB, be sure to select only relevant features
-- Limited dates
-- Drop no locations
-- Alter datetimes
-- Comsolidated agencies and complaint types
+The data from NYC Open Data was originally over 20GB.  In addition, while the dataset is generally clean, there is some standard cleaning and transformations that need to be done.  In order to limit the read/write time and make the operation of the main notebook more efficient, all of the data was read, cleaned and converted into a pickle file.  The main notebook reads this data considerably faster as a result.
+
+**Scaling**.  The weather data is unscaled, and has different types of distribution.
+
+INSERT WEATHER CHARTS HERE
+
+Based on these distributions, each feature was scaled in an appropriate fashion:
+
+* Rainfall, snowfall and wind speed: Box-Cox transformation, addresses right-skewed distributions
+* Temperatures - Temperatures are normally distributed when holding seasonality constant. Seasonal decompose first, then standard scale, then seasonal recompose
+* Daylight Duration - Minmax scaling
 
 ### Modeling
-Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of...
+Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of this baseline.
 
-- AR(1)
+INSERT TIME SERIES IMAGES FROM PPT
+
+**Root Mean Squared Error**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is most directly applicable to mean absolute error. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
+
+**Baseline Model AR(1)**.  AR(1) is the baseline model.  This is the first model to beat:
+
+RMSE on train:  1215
+RMSE on test:   1129
+
+**First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing to obtain stationary data.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
+
+
+
 - ARIMA(1,1,1)
 - SARIMA(1,1,1)(1,1,1,7)
 - SARIMA GRID SEARCH
