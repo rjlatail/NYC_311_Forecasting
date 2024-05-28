@@ -54,7 +54,7 @@ INSERT TIME SERIES IMAGES FROM PPT
 **Baseline Model AR(1)**.  AR(1) is a simple model that is a fairly good predictor of many time series variables.  Because the model only looks back a single period, it can only forecast reliably for one period.  In order to test how the model performs on the test set, a rolling forecast must be produced which projects one period, then rolls forward into the next period.  The period that was previously the first period in the test set is now the last period in a new training set, and the oldest training period is dropped.  This is the first model's results:
 
 | | AR(1) daily |
-|-|-------------------|
+|:-|-------------------:|
 | RMSE on train | 1215 |
 | RMSE on test | 1129 |
 
@@ -75,7 +75,7 @@ INSERT LOLLIPOP CHARTS
 The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model will be ARIMA(1,1,1).  
 
 | | AR(1) daily | ARIMA(1,1,1) |
-|-|-------------------|--------|
+|:-|-------------------:|--------:|
 | RMSE on train | 1215 | 1068 |
 | RMSE on test | 1129 | 989 |
 
