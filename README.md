@@ -72,14 +72,21 @@ p-value (1st diff): 0.0
 
 INSERT LOLLIPOP CHARTS
 
-The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model will be ARIMA(1,1,1).  
+The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model to test with a rolling forecast will be ARIMA(1,1,1).  
 
 | | AR(1) daily | ARIMA(1,1,1) |
 |:-|-------------------:|--------:|
 | RMSE on train | 1215 | 1068 |
 | RMSE on test | 1129 | 989 |
 
-- ARIMA(1,1,1)
+ARIMA(1,1,1) leads to an improvement, but there may be better p and q terms.  Checking for each model could be time consuming and would be computationally, but the auto_arima package can quickly check for likely candidates using the Akaike Information Criterion as a proxy.  That grid search suggests p=4 and q=5 to test in a rolling forecast:  
+
+| | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) |
+|:-|-----------:|-------------:|-------------:|
+| RMSE on train | 1215 | 1068 | 826 |
+| RMSE on test | 1129 | 989 | 924 |
+
+
 - SARIMA(1,1,1)(1,1,1,7)
 - SARIMA GRID SEARCH
 - SARIMAX
