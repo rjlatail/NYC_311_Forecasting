@@ -53,9 +53,10 @@ INSERT TIME SERIES IMAGES FROM PPT
 
 **Baseline Model AR(1)**.  AR(1) is the baseline model.  This is the first model to beat:
 
-AR(1) on next day         AR(1) on next 7 days          AR(1) on next 30 days
-RMSE on train:  1215      RMSE on train:  1215          RMSE on train:  1215
-RMSE on test:   1129      RMSE on test:   1129          RMSE on test:   1129
+| AR(1) on next day | AR(1) on next 7 days | AR(1) on next 30 days |
+|-------------------|----------------------|-----------------------|
+| RMSE on train:  1215 | RMSE on train:  1215 | RMSE on train:  1215 |
+| RMSE on test:   1129 | RMSE on test:   1129 | RMSE on test:   1129 |
 
 **First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing.  To apply ARIMA, we will need to search for the autoregressive (p) term and the moving average (q) term.  But first, we need to ensure that our data is stationary.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
 
