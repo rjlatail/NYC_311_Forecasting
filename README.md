@@ -60,12 +60,12 @@ INSERT TIME SERIES IMAGES FROM PPT
 
 **First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing.  To apply ARIMA, we will need to search for the autoregressive (p) term and the moving average (q) term.  But first, we need to ensure that our data is stationary.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
 
-ADF Statistic: -2.5208859123946588
-p-value: 0.11047490316084208
+ADF Statistic: -2.521  
+p-value: 0.110  
 
 **Not stationary**. Because the p-value is not less than 0.05, and the statistic is not very large, it is not clear that the data is stationary.  In order to transform the data into a stationary dataset, one-period differencing will be applied.  After that transformation, the ADF test is run again:
 
-ADF Statistic (1st diff): -21.56754139806522
+ADF Statistic (1st diff): -21.567  
 p-value (1st diff): 0.0
 
 **Stationary**.  The data is now clearly stationary.  Next, the p and q terms must be established.  To do, the Autocorrelation Function and Partial Autocorrelation Function creates "lollipop" charts to help visually determine the likely terms:
@@ -73,6 +73,11 @@ p-value (1st diff): 0.0
 INSERT LOLLIPOP CHARTS
 
 The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model will be ARIMA(1,1,1).  
+
+| | AR(1) daily | ARIMA(1,1,1) |
+|-|-------------------|--------|
+| RMSE on train | 1215 | 1068 |
+| RMSE on test | 1129 | 989 |
 
 - ARIMA(1,1,1)
 - SARIMA(1,1,1)(1,1,1,7)
