@@ -51,7 +51,7 @@ INSERT TIME SERIES IMAGES FROM PPT
 
 **Root Mean Squared Error**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is most directly applicable to mean absolute error. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
 
-**Baseline Model AR(1)**.  AR(1) is the baseline model.  This is the first model to beat:
+**Baseline Model AR(1)**.  AR(1) is a simple model that is a fairly good predictor of many time series variables.  Because the model only looks back a single period, it can only forecast reliably for one period.  In order to test how the model performs on the test set, a rolling forecast must be produced which projects one period, then rolls forward into the next period.  The period that was previously the first period in the test set is now the last period in a new training set, and the oldest training period is dropped.  This is the first model's results:
 
 | AR(1) on next day |
 |-------------------|
@@ -63,12 +63,16 @@ INSERT TIME SERIES IMAGES FROM PPT
 ADF Statistic: -2.5208859123946588
 p-value: 0.11047490316084208
 
-<b><span style="color:red">Not stationary</span></b>. Because the p-value is not less than 0.05, and the statistic is not very large, it is not clear that the data is stationary.  In order to transform the data into a stationary dataset, one-period differencing will be applied.  After that transformation, the ADF test is run again:
+**Not stationary**. Because the p-value is not less than 0.05, and the statistic is not very large, it is not clear that the data is stationary.  In order to transform the data into a stationary dataset, one-period differencing will be applied.  After that transformation, the ADF test is run again:
 
 ADF Statistic (1st diff): -21.56754139806522
 p-value (1st diff): 0.0
 
-<b><span style="color:#15B01A">Stationary</span></b>.  The data is now clearly stationary.  Further modeling can now be done.  
+**Stationary**.  The data is now clearly stationary.  Next, the p and q terms must be established.  To do, the Autocorrelation Function and Partial Autocorrelation Function creates "lollipop" charts to help visually determine the likely terms:
+
+INSERT LOLLIPOP CHARTS
+
+The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model will be ARIMA(1,1,1).  
 
 - ARIMA(1,1,1)
 - SARIMA(1,1,1)(1,1,1,7)
