@@ -53,10 +53,10 @@ INSERT TIME SERIES IMAGES FROM PPT
 
 **Baseline Model AR(1)**.  AR(1) is a simple model that is a fairly good predictor of many time series variables.  Because the model only looks back a single period, it can only forecast reliably for one period.  In order to test how the model performs on the test set, a rolling forecast must be produced which projects one period, then rolls forward into the next period.  The period that was previously the first period in the test set is now the last period in a new training set, and the oldest training period is dropped.  This is the first model's results:
 
-| AR(1) on next day |
-|-------------------|
-| RMSE on train:  1215 |
-| RMSE on test:   1129 |
+| | AR(1) daily |
+|-|-------------------|
+| RMSE on train | 1215 |
+| RMSE on test | 1129 |
 
 **First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing.  To apply ARIMA, we will need to search for the autoregressive (p) term and the moving average (q) term.  But first, we need to ensure that our data is stationary.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
 
