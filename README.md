@@ -88,16 +88,50 @@ ARIMA(1,1,1) leads to an improvement, but there may be better p and q terms.  Ch
 | RMSE on train | 1215 | 1068 | 826 |
 | RMSE on test | 1129 | 989 | 924 |
 
+The higher order ARIMA model's RMSE is lower, and is now the model to beat.  The next model will attempt to make further improvements by taking into account seasonality.
 
-- SARIMA(1,1,1)(1,1,1,7)
-- SARIMA GRID SEARCH
-- SARIMAX
--   Exogenous variables
-- Prophet
-- GARCH-X
-- LSTM
+**SARIMA**.  SARIMA, or seasonal ARIMA, attempts to decompose seasonal effects from the data to have a better shot at predicting the trend.  In addition to the pdq terms of ARIMA, we need to find PDQ terms for SARIMA, and establish an 'm' term for the length of seasonality.  In this case, m will be 7, to test for a weekly season.  As with ARIMA, the first step is to test for seasonal stationarity.  The prior ACF demonstrated that the data is not seasonally stationary (the periodic spikes in the lollipop).  Seasonal differencing may make it so:
+
+ADF Statistic (1st diff): -21.428598158127986  
+p-value (1st diff): 0.0  
+
+And it is.  New ACF/PACF plots on the seasonally differenced data will suggest P and Q terms:
+
+![lollipop2](Charts/acf2.jpg)
+
+The ACF chart rebounds to zero by the second week, so the first attempted P term will be 1.  The PACF chart is difficult to interpret, and does not decay to insignificance over 50 lags.  The first test will conservatively start with Q = 1 to see if it improves over ARIMA.  Unfortunately, the p and q terms for ARIMA do not always remain the same, so these will also need to be tested, starting with p = 1 and q = 1.   
+
+| | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) | SARIMA(1,1,1)x(1,1,1) |
+|:-|-----------:|-------------:|-------------:|-----------------------:|
+| RMSE on train | 1215 | 1068 | 826 | 779 |
+| RMSE on test | 1129 | 989 | 924 | 897 |
+
+The improvement is modest, but meaningful.  A grid search suggests trying (2,1,0)x(4,0,1).  This is not intuitive, since the D term is set to zero:
+
+
+| | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) | SARIMA(1,1,1)x(1,1,1) | SARIMA(2,1,0)x(4,0,1) |
+|:-|-----------:|-------------:|-------------:|----------------------:|----------------------:|
+| RMSE on train | 1215 | 1068 | 826 | 779 | XXX |
+| RMSE on test | 1129 | 989 | 924 | 897 | XXX |
+
+This time, the grid search recommended model did not improve on the previous SARIMA model.  Next, exogenous 
+
+**SARIMAX**.  The SARIMAX model is an extension of the SARIMA model that accounts for exogenous variables.  This calculation included proposed variables for COVID lockdowns, population, weekends, the introduction of the 311 App, winter months, and different weather metrics.  Based on repeated testing, these variables are meaningful:
+
+* Temperatures
+* Rainfall
+* Total sunlight
+* Wind speed
+* COVID
+
+
+
 
 
 ### Results
 
 
+### Appendix
+- Prophet
+- GARCH-X
+- LSTM
