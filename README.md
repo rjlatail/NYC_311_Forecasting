@@ -121,10 +121,8 @@ This time, the grid search recommended model did not improve on the previous SAR
 * Total sunlight
 * Wind speed
 * COVID
-
-
-
-
+<br>
+<br>
 
 ### Results
 **Daily Forecast**  
