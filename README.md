@@ -132,9 +132,6 @@ Compared to the baseline model, forecasting errors for the next day have been re
 
 
 ![ar1_1](Charts/conf_ar1.jpg)
-
-
-
 ![sarimax_1](Charts/conf_sarimax.jpg)
 <br>
 <br>
@@ -142,9 +139,6 @@ Compared to the baseline model, forecasting errors for the next day have been re
 Compared to the baseline model, forecasting errors for the next week have been reduced by 26% and the confidence interval has been reduced by 58%.  This reflects the fact that a daily-shift model does not make good predictions beyond the 1 day lookback window, whereas the SARIMAX model has significantly more eyesight into the past.
 
 ![ar1_2](Charts/conf_ar1_7.jpg)
-
-
-
 ![sarimax_2](Charts/conf_sarimax_7.jpg)
 <br>
 <br>
@@ -152,16 +146,10 @@ Compared to the baseline model, forecasting errors for the next week have been r
 Compared to the baseline model, forecasting errors for the next month have been reduced by 54% and the confidence interval has been reduced by 73%.  The confidence interval for the daily-shift model is unreasonably large, crossing the zero line.  This is an absurd result, and is an artifact of the assumption of normality when calculating confidence intervals.  A good interpretation of a result like this is that the explanatory power of the daily-shift model is extremely low. 
 
 ![ar1_3](Charts/conf_ar1_30.jpg)
-
-
+![sarimax_3](Charts/conf_sarimax_30.jpg)
+<br>
+<br>
 ### Future Inquiry
 1. The agencies that handle these requests may have specific patterns idiosyncratic to them.  Decompose the series into different pools to model those patterns and roll them up into one composite model would be powerful.
 2. Use geolocation to discover what might happen next.  For instance, pest problems that originate in one area of the city may migrate to others.  Street noise that spikes in one area may predict spikes elsewhere.  This would uncover previously unknown associations and improve your forecasting.
 3. The City has successfully pushed to broaden 311 in the past.  New campaigns to add features and broaden usage, particularly in areas with lower engagement, may seem counterproductive at first, but these are needs that citizens actually have that are not being met, and it’s constructive for the system and the City in the long run to have more data on what New Yorkers need.
-![image](https://github.com/rjlatail/NYC_311_Forecasting/assets/120394045/c65dfbfc-4a20-4737-8e65-a798cc1f9126)
-![image](https://github.com/rjlatail/NYC_311_Forecasting/assets/120394045/c65dfbfc-4a20-4737-8e65-a798cc1f9126)
-
-
-
-
-![sarimax_3](Charts/conf_sarimax_30.jpg)
