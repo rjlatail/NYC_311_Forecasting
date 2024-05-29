@@ -151,4 +151,3 @@ Compared to the baseline model, forecasting errors for the next month have been 
 2. Use geolocation to discover what might happen next.  For instance, pest problems that originate in one area of the city may migrate to others.  Street noise that spikes in one area may predict spikes elsewhere.  This would uncover previously unknown associations and improve your forecasting.
 3. The City has successfully pushed to broaden 311 in the past.  New campaigns to add features and broaden usage, particularly in areas with lower engagement, may seem counterproductive at first, but these are needs that citizens actually have that are not being met, and it’s constructive for the system and the City in the long run to have more data on what New Yorkers need.
 ![flushing](Images/Flushing_311.png)
-![flushing](Images/Flushing_311.png)
