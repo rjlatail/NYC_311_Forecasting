@@ -30,18 +30,63 @@ Given the consistent demand for and high expectations of the service, anticipati
 **Population**: Annual figures sourced from the US Census Bureau, interpolated on a linear basis for intermediate dates.
 
 ### Data Preparation and Transformation
-<code style>TO BE COMPLETED</code>
-- Data = 20+ GB, be sure to select only relevant features
-- Limited dates
-- Drop no locations
-- Alter datetimes
-- Comsolidated agencies and complaint types
+The data from NYC Open Data was originally over 20GB.  In addition, while the dataset is generally clean, there is some standard cleaning and transformations that need to be done.  In order to limit the read/write time and make the operation of the main notebook more efficient, all of the data was read, cleaned and converted into a pickle file.  The main notebook reads this data considerably faster as a result.
+
+**Scaling**.  The weather data is unscaled, and has different types of distribution.
+
+
+INSERT WEATHER CHARTS HERE
+
+
+Based on these distributions, each feature was scaled in an appropriate fashion:
+
+* Rainfall, snowfall and wind speed: Box-Cox transformation, addresses right-skewed distributions
+* Temperatures - Temperatures are normally distributed when holding seasonality constant. Seasonal decompose first, then standard scale, then seasonal recompose
+* Daylight Duration - Minmax scaling
 
 ### Modeling
-Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of...
+Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of this baseline.
 
-- AR(1)
-- ARIMA(1,1,1)
+INSERT TIME SERIES IMAGES FROM PPT
+
+**Root Mean Squared Error**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is most directly applicable to mean absolute error. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
+
+**Baseline Model AR(1)**.  AR(1) is a simple model that is a fairly good predictor of many time series variables.  Because the model only looks back a single period, it can only forecast reliably for one period.  In order to test how the model performs on the test set, a rolling forecast must be produced which projects one period, then rolls forward into the next period.  The period that was previously the first period in the test set is now the last period in a new training set, and the oldest training period is dropped.  This is the first model's results:
+
+| | AR(1) daily |
+|:-|-------------------:|
+| RMSE on train | 1215 |
+| RMSE on test | 1129 |
+
+**First Simple Model: ARIMA**.  ARIMA models integrate autoregressive components, moving averages and differencing.  To apply ARIMA, we will need to search for the autoregressive (p) term and the moving average (q) term.  But first, we need to ensure that our data is stationary.  Stationarity in data refers to the condition where the statistical properties of the series (mean, variance, autocorrelation) do not change over time.  Time series forecasting models benefit from stationary data.  The Augmented Dickey-Fuller test (or ADF) is a significance test to determine whether the data is stationary.
+
+ADF Statistic: -2.521  
+p-value: 0.110  
+
+**Not stationary**. Because the p-value is not less than 0.05, and the statistic is not very large, it is not clear that the data is stationary.  In order to transform the data into a stationary dataset, one-period differencing will be applied.  After that transformation, the ADF test is run again:
+
+ADF Statistic (1st diff): -21.567  
+p-value (1st diff): 0.0
+
+**Stationary**.  The data is now clearly stationary.  Next, the p and q terms must be established.  To do, the Autocorrelation Function and Partial Autocorrelation Function creates "lollipop" charts to help visually determine the likely terms:
+
+![lollipop1](Charts/acf1.jpg)
+
+The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model to test with a rolling forecast will be ARIMA(1,1,1).  
+
+| | AR(1) daily | ARIMA(1,1,1) |
+|:-|-------------------:|--------:|
+| RMSE on train | 1215 | 1068 |
+| RMSE on test | 1129 | 989 |
+
+ARIMA(1,1,1) leads to an improvement, but there may be better p and q terms.  Checking for each model could be time consuming and would be computationally, but the auto_arima package can quickly check for likely candidates using the Akaike Information Criterion as a proxy.  That grid search suggests p=4 and q=5 to test in a rolling forecast:  
+
+| | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) |
+|:-|-----------:|-------------:|-------------:|
+| RMSE on train | 1215 | 1068 | 826 |
+| RMSE on test | 1129 | 989 | 924 |
+
+
 - SARIMA(1,1,1)(1,1,1,7)
 - SARIMA GRID SEARCH
 - SARIMAX
