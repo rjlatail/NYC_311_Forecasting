@@ -48,7 +48,7 @@ Based on these distributions, each feature was scaled in an appropriate fashion:
 Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of this baseline.
 
 
-![timeseries](daily_volume_shaded.jpg)
+![timeseries](Charts/daily_volume_shaded.jpg)
 
 
 **Root Mean Squared Error**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is most directly applicable to mean absolute error. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
