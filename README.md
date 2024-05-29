@@ -139,6 +139,7 @@ Compared to the baseline model, forecasting errors for the next day have been re
 
 ![sarimax_1](Charts/conf_sarimax.jpg)
 <br>
+<br>
 **Weekly Forecast**  
 Compared to the baseline model, forecasting errors for the next week have been reduced by 26% and the confidence interval has been reduced by 58%.  This reflects the fact that a daily-shift model does not make good predictions beyond the 1 day lookback window, whereas the SARIMAX model has significantly more eyesight into the past.
 
@@ -147,6 +148,7 @@ Compared to the baseline model, forecasting errors for the next week have been r
 
 
 ![sarimax_2](Charts/conf_sarimax_7.jpg)
+<br>
 <br>
 **Monthly Forecast**  
 Compared to the baseline model, forecasting errors for the next month have been reduced by 54% and the confidence interval has been reduced by 73%.  The confidence interval for the daily-shift model is unreasonably large, crossing the zero line.  This is an absurd result, and is an artifact of the assumption of normality when calculating confidence intervals.  A good interpretation of a result like this is that the explanatory power of the daily-shift model is extremely low. 
