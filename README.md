@@ -70,7 +70,7 @@ p-value (1st diff): 0.0
 
 **Stationary**.  The data is now clearly stationary.  Next, the p and q terms must be established.  To do, the Autocorrelation Function and Partial Autocorrelation Function creates "lollipop" charts to help visually determine the likely terms:
 
-INSERT LOLLIPOP CHARTS
+![lollipop1](Charts/acf1.jpg)
 
 The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The oscillation makes it difficult to determine for sure.  Notably, the 7-day pattern of spikes suggests 7-day seasonality.  The first simple model to test with a rolling forecast will be ARIMA(1,1,1).  
 
