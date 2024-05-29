@@ -14,11 +14,11 @@ Since 2003, New York City has maintained the 311 service, a hub that connects re
 
 While the cost to the city is not large ($68 million out of a $107 annual billion budget, or less than 0.1%) the value it provides to residents and government officials is considerably larger.  Prior to its advent, the city maintained over 40 separate hotlines and call centers for non-emergency resident services, often with overlapping responsibilities.  As a result of having so many entry points to the city, residents often were confused regarding the right way to contact the City.  Very often, residents chose to call the NYPD or 911, even for non-criminal or non-emergency purposes.  By creating such a recognizable and easy-to-remember portal, the City relieved its agencies of this burden and has been able to more effectively address residents' concerns.
 
-Since inception, the service has continued to expand its usefulness and connectivity.  It maintains a significant social media presence, and in 2013 introduced the 311 App to answer questions or allow service request submissions while avoid lengthening call queues.  However, the service is still in very high demand.  The City Council recently passed a bill to require virtual queues with estimated wait times for callers:
+Since inception, the service has continued to expand its usefulness and connectivity.  It maintains a significant social media presence, and in 2013 introduced the 311 App to answer questions or allow service request submissions while avoid lengthening call queues.  However, the service is still in very high demand.  The City Council recently passed a bill to require virtual queues with estimated wait times for callers, and more legislation is queuing up:
 
 ![tweet](Images/NYC_Council_Tweet.png)
 
-Given the consistent demand for and high expectations of the service, anticipating usage of the service would enable the City to meet its citizens needs on a timely basis.  <ins><b>Successful forecasting of next-day, next-week and next-month volumes</b></ins> would lead to residents who are more satisfied with the responsiveness of their local government.  
+Given the consistent demand for and high expectations of the service, anticipating requests would enable the City to meet its citizens needs on a timely basis.  <ins><b>Successful forecasting of next-day, next-week and next-month volumes</b></ins> would lead to residents who are more satisfied with the responsiveness of their local government.  
 
 ### Data Sources
 **NYC Open Data**: Under the Open Data Law, all New York City agencies are required to make their datasets publicly available on a public portal.  Prior to the creation of the portal, city agencies were required to provide information upon request through New York State's Freedom of Information Law.  However, this method of retrieving information was cumbersome for the requestor and often ineffective, as requests would be submitted ad hoc to a bureaucracy that was not structured to handle them.  The law required city agencies to proactively gather and make available their datasets to the public at large.  The [311 Service Requests](https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/about_data) data set has been available since 2011 and now has over 36 million records included with 41 features.
@@ -28,13 +28,11 @@ Given the consistent demand for and high expectations of the service, anticipati
 **Population**: Annual figures sourced from the US Census Bureau, interpolated on a linear basis for intermediate dates.
 
 ### Data Preparation and Transformation
-The data from NYC Open Data was originally over 20GB.  In addition, while the dataset is generally clean, there is some standard cleaning and transformations that need to be done.  In order to limit the read/write time and make the operation of the main notebook more efficient, all of the data was read, cleaned and converted into a pickle file.  The main notebook reads this data considerably faster as a result.
+The data from NYC Open Data was originally over 20GB.  In addition, while the dataset is generally clean, there is some standard cleaning and transformations that need to be done.  In order to limit the read/write time and make the operation of the main notebook more efficient, all of the data was read, cleaned and converted into a pickle file.  The code to do so is in a subsidiary notebook in this repository.  The main notebook reads this data considerably faster as a result.
 
-**Scaling**.  The weather data is unscaled, and has different types of distribution.
-
+**Scaling**.  The weather data is unscaled, and has different types of distribution.  The charts below demonstrate the different types of unscaled distribution:
 
 ![weather](Charts/weather.jpg)
-
 
 Based on these distributions, each feature was scaled in an appropriate fashion:
 
@@ -43,13 +41,11 @@ Based on these distributions, each feature was scaled in an appropriate fashion:
 * Daylight Duration - Minmax scaling
 
 ### Modeling
-Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or shift(1), which reports yesterday's value with a coefficient) are particularly common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of this baseline.
-
+Time series frequently use one of a few types of baseline model.  In particular, AR(1) (or daily-shift, which reports yesterday's value with a coefficient) are common, since time series typically have a strong autoregressive component.  The goal is to surpass the performance of this baseline.
 
 ![timeseries](Charts/daily_volume_shaded.jpg)
 
-
-**Root Mean Squared Error**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is most directly applicable to mean absolute error. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
+**Root Mean Squared Error is the loss function**.  The value of forecasting to the 311 service and other agencies is to better predict the necessary resources to respond to requests. The amount of resources necessary is an absolute number, so mean absolute error would be an adequate measure. However, the service should place a heavier emphasis on outliers. Residents' dissatisfaction with government performance likely follows an exponential pattern, not a linear one. 20 minutes wait time is more than two times worse than 10 minutes. Two weeks for an agency to respond is more than twice as bad as one week. **RMSE** captures both the scale of the problem and the importance of outliers. When using grid search to select parameters, **Akaike Information Criterion** will be used to select the winning combination.
 
 **Baseline Model AR(1)**.  AR(1) is a simple model that is a fairly good predictor of many time series variables.  Because the model only looks back a single period, it can only forecast reliably for one period.  In order to test how the model performs on the test set, a rolling forecast must be produced which projects one period, then rolls forward into the next period.  The period that was previously the first period in the test set is now the last period in a new training set, and the oldest training period is dropped.  This is the first model's results:
 
@@ -109,25 +105,28 @@ The improvement is modest, but meaningful.  A grid search suggests trying (2,1,0
 
 | | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) | SARIMA(1,1,1)x(1,1,1) | SARIMA(2,1,0)x(4,0,1) |
 |:-|-----------:|-------------:|-------------:|----------------------:|----------------------:|
-| RMSE on train | 1215 | 1068 | 826 | 779 | XXX |
-| RMSE on test | 1129 | 989 | 924 | 897 | XXX |
+| RMSE on train | 1215 | 1068 | 826 | 779 | 808 |
+| RMSE on test | 1129 | 989 | 924 | 897 | 943 |
 
-This time, the grid search recommended model did not improve on the previous SARIMA model.  Next, exogenous 
+This time, the grid search recommended model did not improve on the previous SARIMA model. 
 
 **SARIMAX**.  The SARIMAX model is an extension of the SARIMA model that accounts for exogenous variables.  This calculation included proposed variables for COVID lockdowns, population, weekends, the introduction of the 311 App, winter months, and different weather metrics.  Based on repeated testing, these variables are meaningful:
 
-* Temperatures
-* Rainfall
+* Temperature
+* Precipitation
 * Total sunlight
 * Wind speed
 * COVID
 <br>
-<br>
+
+| | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) | SARIMA(1,1,1)x(1,1,1) | SARIMA(2,1,0)x(4,0,1) | SARIMAX |
+|:-|-----------:|-------------:|-------------:|----------------------:|----------------------:|--------:|
+| RMSE on train | 1215 | 1068 | 826 | 779 | 808 | 747 |
+| RMSE on test | 1129 | 989 | 924 | 897 | 943 | 879 |
 
 ### Results
 **Daily Forecast**  
 Compared to the baseline model, forecasting errors for the next day have been reduced by 22% and the confidence interval has been reduced by 35%.
-
 
 ![ar1_1](Charts/conf_ar1.jpg)
 ![sarimax_1](Charts/conf_sarimax.jpg)
