@@ -35,7 +35,7 @@ The data from NYC Open Data was originally over 20GB.  In addition, while the da
 **Scaling**.  The weather data is unscaled, and has different types of distribution.
 
 
-INSERT WEATHER CHARTS HERE
+![weather](Charts/weather.jpg)
 
 
 Based on these distributions, each feature was scaled in an appropriate fashion:
