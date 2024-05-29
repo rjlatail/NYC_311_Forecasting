@@ -158,17 +158,3 @@ Compared to the baseline model, forecasting errors for the next month have been 
 
 
 ![sarimax_3](Charts/conf_sarimax_30.jpg)
-
-
-
-
-
-
-
-
-
-
-### Appendix
-- Prophet
-- GARCH-X
-- LSTM
