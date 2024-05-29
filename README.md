@@ -129,6 +129,38 @@ This time, the grid search recommended model did not improve on the previous SAR
 
 
 ### Results
+Lorem ipsum
+
+
+![ar1_1](Charts/conf_ar1)
+
+
+
+![ar1_1](Charts/conf_sarimax)
+
+
+
+![ar1_1](Charts/conf_ar1_7)
+
+
+
+![ar1_1](Charts/conf_sarimax_7)
+
+
+
+![ar1_1](Charts/conf_ar1_30)
+
+
+
+![ar1_1](Charts/conf_sarimax_30)
+
+
+
+
+
+
+
+
 
 
 ### Appendix
