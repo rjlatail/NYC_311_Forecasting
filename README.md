@@ -129,7 +129,7 @@ This time, the grid search recommended model did not improve on the previous SAR
 
 
 ### Results
-Lorem ipsum
+Compared to the baseline model, forecasting errors for the next day have been reduced by 22% and the confidence interval has been reduced by 35%.
 
 
 ![ar1_1](Charts/conf_ar1.jpg)
@@ -138,7 +138,7 @@ Lorem ipsum
 
 ![sarimax_1](Charts/conf_sarimax.jpg)
 
-
+Compared to the baseline model, forecasting errors for the next week have been reduced by 26% and the confidence interval has been reduced by 58%.  This reflects the fact that a daily-shift model does not make good predictions beyond the 1 day lookback window, whereas the SARIMAX model has significantly more eyesight into the past.
 
 ![ar1_2](Charts/conf_ar1_7.jpg)
 
@@ -146,7 +146,7 @@ Lorem ipsum
 
 ![sarimax_2](Charts/conf_sarimax_7.jpg)
 
-
+Compared to the baseline model, forecasting errors for the next month have been reduced by 54% and the confidence interval has been reduced by 73%.  The confidence interval for the daily-shift model is unreasonably large, crossing the zero line.  This is an absurd result, and is an artifact of the assumption of normality when calculating confidence intervals.  A good interpretation of a result like this is that the explanatory power of the daily-shift model is extremely low. 
 
 ![ar1_3](Charts/conf_ar1_30.jpg)
 
