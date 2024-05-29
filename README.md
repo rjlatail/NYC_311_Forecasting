@@ -97,7 +97,7 @@ p-value (1st diff): 0.0
 
 And it is.  New ACF/PACF plots on the seasonally differenced data will suggest P and Q terms:
 
-![lollipop2](Charts/acf2.jpg)
+![lollipop2](Charts/acf3.jpg)
 
 The ACF chart rebounds to zero by the second week, so the first attempted P term will be 1.  The PACF chart is difficult to interpret, and does not decay to insignificance over 50 lags.  The first test will conservatively start with Q = 1 to see if it improves over ARIMA.  Unfortunately, the p and q terms for ARIMA do not always remain the same, so these will also need to be tested, starting with p = 1 and q = 1.   
 
