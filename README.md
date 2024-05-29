@@ -3,10 +3,8 @@
 Since 2003, New York City has maintained the 311 service, a hub that connects residents to city agencies and provide them with quick and easy access to local government.  It is available 24 hours a day, 7 days a week, 365 days a year, providing assistance in 175 languages and to the hearing-impaired.  In 2023, residents used the 311 service 3.2 million times.  It has become the first stop for residents for a whole host of services, including:
 
 - To secure official documents, such as business, pet or marriage licenses
-- To get a business, pet or marriage license
 - To report a pothole or request street resurfacing
 - To stay up-to-date on public school calendars, including snow days
-- To be informed about city-wide parking rules
 - To inform city agencies about quality of life concerns such as noise or litter
 - To request maintenance for city-owned apartments and buildings
 - To make payments towards property taxes, parking tickets, or other city assessments
