@@ -75,7 +75,7 @@ The drop-off after 1 term in each chart suggests that p = 1 and q = 1.  The osci
 | RMSE on train | 1215 | 1068 |
 | RMSE on test | 1129 | 989 |
 
-ARIMA(1,1,1) leads to an improvement, but there may be better p and q terms.  Checking for each model could be time consuming and would be computationally, but the auto_arima package can quickly check for likely candidates using the Akaike Information Criterion as a proxy.  That grid search suggests p=4 and q=5 to test in a rolling forecast:  
+ARIMA(1,1,1) leads to an improvement, but there may be better p and q terms.  Checking for each model could be time consuming and would be computationally expensive, but the auto_arima package can quickly check for likely candidates using the Akaike Information Criterion as a proxy.  That grid search suggests p=4 and q=5 to test in a rolling forecast:  
 
 | | AR(1) daily | ARIMA(1,1,1) | ARIMA(4,1,5) |
 |:-|-----------:|-------------:|-------------:|
