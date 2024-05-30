@@ -152,4 +152,3 @@ Compared to the baseline model, forecasting errors for the next month have been 
 3. The City has successfully pushed to broaden 311 in the past.  New campaigns to add features and broaden usage, particularly in areas with lower engagement, may seem counterproductive at first, but these are needs that citizens actually have that are not being met, and it’s constructive for the system and the City in the long run to have more data on what New Yorkers need.
 <br>
 ![flushing](Images/Flushing_311.png)  
-*[Image source](https://hunterurbanreview.commons.gc.cuny.edu/the-value-of-311-data/): Used under CC BY-NC-SA 4.0*
